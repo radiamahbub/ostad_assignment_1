@@ -22,39 +22,75 @@ Grade: A+
 '''
 all_student = []
 
-def student():
+
+def add_student():
     s_name = input("Enter Student Name: ")
-    math = input("Enter The Marks for Mathematics:")
-    bangla = input("Enter The Marks for Bangla: ")
-    english = input("Enter The Marks for English: ")
+
+    math = int(input("Enter The Marks for Mathematics:"))
+    bangla = int(input("Enter The Marks for Bangla: "))
+    english = int(input("Enter The Marks for English: "))
+
+    total_marks = math + bangla + english
+    ave_marks = (math + bangla + english)/3
+
+    s_grade = grade(ave_marks)
 
     s_data = {
         "s_name": s_name,
         "math": math,
         "bangla": bangla,
-        "english": english
-        
+        "english": english,
+        "total_marks": total_marks,
+        "ave_marks": ave_marks,
+        "grade": s_grade
     }
 
     all_student.append(s_data)
+    print('Student Addedd Successfully!')
 
 
-    
-    
+def view_student():
+    for student in all_student:
+        print(f"Student Name: {student['s_name']}")
+        print(f"Math: {student['math']}")
+        print(f"Bangla: {student['bangla']}")
+        print(f"English: {student['english']}")
+        print(f"Total Marks: {student['total_marks']}")
+        print(f"Average: {student['ave_marks']:.2f}")
+        print(f"Grade: {student['grade']}")
 
 
-total_marks = math + bangla + english
-average_marks = (math + bangla + english)/3
+def grade(ave_marks):
+    if 80 <= ave_marks <= 100:
+        return "A+"
+    elif 70 <= ave_marks < 80:
+        return "A"
+    elif 60 <= ave_marks < 70:
+        return "B"
+    elif 50 <= ave_marks < 60:
+        return "C"
+    elif 0 <= ave_marks < 50:
+        return "F"
+    else:
+        return "No Grade Found!"                
 
- 
 
-if average_marks >= 80 and <= 100:
-    print("A+")
-elif average_marks >= 70 and <= 79:
-    print("A")  
-elif average_marks >= 60 and <= 69:
-    print("B") 
-elif average_marks >= 50 and <= 59:
-    print("C")
-elif average_marks <= 50:
-    print("F")                 
+while True:
+    print("Student Grade Calculator")
+    print("""
+    1. Add Student
+    2. View Students
+    3. Exit
+    """)
+
+    select = int(input("Select from here: "))
+
+    if select == 1:
+        add_student()
+    elif select == 2:
+        view_student()
+    elif select == 3:
+        print("Done!")
+        break
+    else:
+        print("Enter Valid Input (1 to 3)")
